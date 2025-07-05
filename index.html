@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket Rewards</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    .container { max-width: 400px; margin: 50px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; }
+    .dashboard { display: none; }
+    .warning { background: #ffdddd; border: 1px solid #ff5555; padding: 10px; margin-top: 20px; color: #a00; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="signup">
+      <h2>Sign Up</h2>
+      <input type="text" id="phone" placeholder="Phone Number" />
+      <input type="password" id="password" placeholder="Password" />
+      <input type="text" id="referral" placeholder="Referral Code (optional)" />
+      <button onclick="register()">Register</button>
+    </div><div class="dashboard">
+  <h2>Welcome!</h2>
+  <p><strong>Your Tickets:</strong> <span id="ticketCount">0</span></p>
+  <button onclick="inviteFriend()">Invite Friend</button>
+  <button onclick="withdrawTickets()">Withdraw</button>
+  <div class="warning">
+    ⚠️ This is a demonstration website. <br>
+    No real money or rewards are involved. <br>
+    Anyone can create a fake reward site to trick users. Be cautious online.
+  </div>
+</div>
+
+  </div>  <script>
+    let ticketCount = 0;
+
+    function register() {
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+      if (!phone || !password) {
+        alert('Please enter both phone number and password.');
+        return;
+      }
+      document.querySelector('.signup').style.display = 'none';
+      document.querySelector('.dashboard').style.display = 'block';
+      ticketCount = 10; // starting bonus
+      updateTickets();
+    }
+
+    function updateTickets() {
+      document.getElementById('ticketCount').innerText = ticketCount;
+    }
+
+    function inviteFriend() {
+      ticketCount += 5;
+      updateTickets();
+      alert('Friend invited! You earned 5 tickets.');
+    }
+
+    function withdrawTickets() {
+      alert('Withdrawal pending... please invite more users to activate withdrawal.');
+    }
+  </script></body>
+  </html>
