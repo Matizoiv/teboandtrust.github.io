@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultimate Ticket Rewards</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #eef2f7; margin: 0; padding: 0; }
+    .container { max-width: 500px; margin: 50px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    h2 { text-align: center; }
+    input, button { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; }
+    .dashboard { display: none; }
+    .stats, .referral, .transactions { margin-top: 20px; }
+    .warning { background: #ffe5e5; border: 1px solid #ff4d4d; padding: 10px; margin-top: 20px; color: #a00; border-radius: 8px; }
+    .transactions ul { padding-left: 20px; }
+    .btn-group button { width: 48%; display: inline-block; margin-right: 2%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="signup">
+      <h2>Register to Start Earning</h2>
+      <input type="text" id="phone" placeholder="Phone Number" />
+      <input type="password" id="password" placeholder="Password" />
+      <input type="text" id="referral" placeholder="Referral Code (optional)" />
+      <button onclick="register()">Sign Up</button>
+    </div>
+
+    <div class="dashboard">
+      <h2>Welcome Back!</h2>
+      <div class="stats">
+        <p><strong>Your Tickets:</strong> <span id="ticketCount">0</span></p>
+        <p><strong>Referral Code:</strong> <span id="yourReferral">USR12345</span></p>
+      </div>
+
+      <div class="btn-group">
+        <button onclick="inviteFriend()">Invite Friend</button>
+        <button onclick="claimBonus()">Daily Bonus</button>
+      </div>
+
+      <div class="referral">
+        <h3>Invite & Earn</h3>
+        <p>Share your code and earn <strong>5 tickets</strong> per signup!</p>
+      </div>
+
+      <div class="transactions">
+        <h3>Transaction History</h3>
+        <ul id="transactionList">
+          <li>Signup Bonus: +10 Tickets</li>
+        </ul>
+      </div>
+
+      <button onclick="withdrawTickets()">Request Withdrawal</button>
+
+      <div class="warning">
+        ⚠️ This is a simulated website for educational purposes only. <br>
+        No actual rewards or money can be earned here.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let ticketCount = 10;
+    let transactions = ['Signup Bonus: +10 Tickets'];
+
+    function register() {
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+      if (!phone || !password) {
+        alert('Please enter both phone number and password.');
+        return;
+      }
+      document.querySelector('.signup').style.display = 'none';
+      document.querySelector('.dashboard').style.display = 'block';
+      updateUI();
+    }
+
+    function updateUI() {
+      document.getElementById('ticketCount').innerText = ticketCount;
+      const list = document.getElementById('transactionList');
+      list.innerHTML = '';
+      transactions.forEach(tx => {
+        const li = document.createElement('li');
+        li.textContent = tx;
+        list.appendChild(li);
+      });
+    }
+
+    function inviteFriend() {
+      ticketCount += 5;
+      transactions.push('Invited Friend: +5 Tickets');
+      updateUI();
+      alert('You invited a friend! You earned 5 tickets.');
+    }
+
+    function claimBonus() {
+      ticketCount += 3;
+      transactions.push('Daily Bonus Claimed: +3 Tickets');
+      updateUI();
+      alert('Daily bonus claimed!');
+    }
+
+    function withdrawTickets() {
+      alert('Withdrawal request failed: account not verified.
+Please invite more friends to unlock this feature.');
+      transactions.push('Withdrawal Attempt: Failed (Verification Needed)');
+      updateUI();
+    }
+  </script>
+</body>
+</html>
